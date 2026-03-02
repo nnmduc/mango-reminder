@@ -39,9 +39,19 @@ export function useCountdown(
   const previousTimeRef = useRef<number>(totalSeconds)
   const milestonesTriggeredRef = useRef<Set<string>>(new Set())
 
-  // Calculate progress (0 = start, 1 = complete)
-  const progress = 1 - timeRemaining / totalSeconds
-  const isCompleted = timeRemaining === 0
+  // Sync timeRemaining when duration changes — uses state (not ref) so it works
+  // correctly in React StrictMode (which renders twice to detect side effects)
+  const [prevTotalSeconds, setPrevTotalSeconds] = useState(totalSeconds)
+  if (prevTotalSeconds !== totalSeconds) {
+    setPrevTotalSeconds(totalSeconds)
+    setTimeRemaining(totalSeconds)
+    previousTimeRef.current = totalSeconds
+    milestonesTriggeredRef.current.clear()
+  }
+
+  // Calculate progress (0 = start, 1 = complete), guard against division by zero
+  const progress = totalSeconds > 0 ? 1 - timeRemaining / totalSeconds : 0
+  const isCompleted = timeRemaining === 0 && totalSeconds > 0
 
   // Start timer
   const start = useCallback(() => {

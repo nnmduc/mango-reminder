@@ -3,31 +3,37 @@ import { motion } from 'framer-motion'
 
 interface AlligatorCharacterProps {
   progress: number // 0-1
+  isRunning: boolean
   isEating: boolean
   reducedMotion: boolean
 }
 
 export function AlligatorCharacter({
   progress,
+  isRunning,
   isEating,
   reducedMotion
 }: AlligatorCharacterProps) {
   // Position based on progress (0% -> 85% of track width)
   const xPosition = progress * 85
 
-  // Idle animation variants
+  // Body bob — faster and bigger when running
   const bodyVariants = {
     idle: reducedMotion
       ? { y: 0 }
-      : {
-          y: [0, -3, 0],
-          transition: {
-            repeat: Infinity,
-            duration: 2,
-            ease: 'easeInOut'
-          }
-        }
+      : { y: [0, -3, 0], transition: { repeat: Infinity, duration: 2, ease: 'easeInOut' } },
+    running: reducedMotion
+      ? { y: 0 }
+      : { y: [0, -6, 0], transition: { repeat: Infinity, duration: 0.45, ease: 'easeInOut' } }
   }
+
+  // Leg swing for running animation (legs alternate in pairs)
+  const legNormal = isRunning && !reducedMotion
+    ? { rotate: [-25, 25, -25], transition: { repeat: Infinity, duration: 0.45, ease: 'easeInOut' } }
+    : { rotate: 0 }
+  const legAlt = isRunning && !reducedMotion
+    ? { rotate: [25, -25, 25], transition: { repeat: Infinity, duration: 0.45, ease: 'easeInOut' } }
+    : { rotate: 0 }
 
   // Jaw animation when eating
   const jawVariants = {
@@ -45,13 +51,18 @@ export function AlligatorCharacter({
       viewBox="0 0 80 60"
       style={{
         position: 'absolute',
-        left: `${xPosition}%`,
         top: '50%',
-        transform: 'translateY(-50%)'
+        marginTop: '-30px' // half of SVG height (60px) — avoids framer-motion transform conflict
       }}
-      animate="idle"
-      variants={bodyVariants}
+      initial={{ left: '0%' }}
+      animate={{ left: `${xPosition}%` }}
+      transition={{ left: { type: 'tween', duration: 1, ease: 'linear' } }}
     >
+      {/* Body bob as a separate inner group so position and bob don't conflict */}
+      <motion.g
+        animate={isRunning ? 'running' : 'idle'}
+        variants={bodyVariants}
+      >
       {/* Tail */}
       <motion.path
         d="M 5 30 Q 0 25, 3 20 Q 8 15, 5 10"
@@ -133,34 +144,18 @@ export function AlligatorCharacter({
         />
       </motion.g>
 
-      {/* Legs (simple lines) */}
-      <line
-        x1="25"
-        y1="45"
-        x2="23"
-        y2="55"
-        stroke="#2d8659"
-        strokeWidth="5"
-        strokeLinecap="round"
-      />
-      <line
-        x1="35"
-        y1="46"
-        x2="35"
-        y2="56"
-        stroke="#2d8659"
-        strokeWidth="5"
-        strokeLinecap="round"
-      />
-      <line
-        x1="45"
-        y1="45"
-        x2="47"
-        y2="55"
-        stroke="#2d8659"
-        strokeWidth="5"
-        strokeLinecap="round"
-      />
+      {/* Legs — wrapped in motion.g for running cycle animation */}
+      {/* Leg 1 (front) and Leg 3 (back) swing together; Leg 2 (middle) alternates */}
+      <motion.g style={{ transformOrigin: '25px 45px' }} animate={legNormal}>
+        <line x1="25" y1="45" x2="23" y2="55" stroke="#2d8659" strokeWidth="5" strokeLinecap="round" />
+      </motion.g>
+      <motion.g style={{ transformOrigin: '35px 46px' }} animate={legAlt}>
+        <line x1="35" y1="46" x2="35" y2="56" stroke="#2d8659" strokeWidth="5" strokeLinecap="round" />
+      </motion.g>
+      <motion.g style={{ transformOrigin: '45px 45px' }} animate={legNormal}>
+        <line x1="45" y1="45" x2="47" y2="55" stroke="#2d8659" strokeWidth="5" strokeLinecap="round" />
+      </motion.g>
+      </motion.g>{/* end body bob group */}
     </motion.svg>
   )
 }

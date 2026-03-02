@@ -27,8 +27,9 @@ export function CountdownDisplay({
   isMuted = false,
   onToggleMute
 }: CountdownDisplayProps) {
-  // Calculate progress (0 = start, 1 = complete)
-  const progress = 1 - remainingSeconds / activity.duration
+  // Calculate progress (0 = start, 1 = complete), clamped to avoid negative values
+  // during the brief render before useCountdown syncs to the new activity duration
+  const progress = Math.max(0, Math.min(1, 1 - remainingSeconds / activity.duration))
   const isRunning = timerState === 'running'
   const isCompleted = timerState === 'completed'
 

@@ -36,6 +36,40 @@
   }
 }
 
+/* Add preset button */
+.addBtn {
+  min-width: 160px;
+  min-height: 160px;
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  border: 3px dashed #ccc;
+  border-radius: 16px;
+  background: transparent;
+  cursor: pointer;
+  color: var(--color-text-light);
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.addBtn:hover {
+  border-color: var(--color-text);
+  color: var(--color-text);
+}
+
+.addIcon {
+  font-size: 40px;
+  line-height: 1;
+  font-weight: 300;
+}
+
+.addLabel {
+  font-size: 16px;
+  font-weight: 600;
+}
+
 /* Mobile stack */
 @media (max-width: 480px) {
   .grid {
@@ -44,5 +78,19 @@
 
   .title {
     font-size: 28px;
+  }
+
+  .addBtn {
+    min-width: unset;
+    min-height: 80px;
+    flex-direction: row;
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .addBtn {
+    min-width: 200px;
+    min-height: 200px;
   }
 }

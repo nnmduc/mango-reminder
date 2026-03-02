@@ -18,7 +18,7 @@ function App() {
 
   // Countdown timer with audio milestones
   const { state: countdownState, start, pause, resume, reset } = useCountdown(
-    selectedActivity ? selectedActivity.duration / 60 : 45, // Convert seconds to minutes
+    selectedActivity ? selectedActivity.duration / 60 : 0, // 0 when idle — ensures sync fires on every activity change
     {
       onMilestone: (soundId) => playSound(soundId),
       onComplete: () => playSound('celebration')

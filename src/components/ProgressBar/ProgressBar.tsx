@@ -61,6 +61,7 @@ export function ProgressBar({
       <div className={styles.charactersLayer}>
         <AlligatorCharacter
           progress={progress}
+          isRunning={isRunning}
           isEating={isEating}
           reducedMotion={reducedMotion}
         />

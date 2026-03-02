@@ -1,4 +1,33 @@
 /* ActivityCard styles - Large touch target with color-coded background */
+.wrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+.editBtn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: rgba(255, 255, 255, 0.85);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: transform 0.15s ease, background 0.15s ease;
+  z-index: 1;
+}
+
+.editBtn:hover {
+  transform: scale(1.1);
+  background: white;
+}
+
 .card {
   /* Touch target size */
   min-width: 160px;

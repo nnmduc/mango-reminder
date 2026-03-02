@@ -1,0 +1,226 @@
+/* PresetEditorModal styles */
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: var(--spacing-md);
+}
+
+.modal {
+  background: var(--color-bg);
+  border-radius: 20px;
+  padding: var(--spacing-lg);
+  width: 100%;
+  max-width: 380px;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 4px;
+}
+
+/* Preview */
+.preview {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  border-radius: 14px;
+  padding: var(--spacing-md);
+  margin-bottom: 4px;
+}
+
+.previewEmoji {
+  font-size: 36px;
+  line-height: 1;
+}
+
+.previewName {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.previewTime {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
+}
+
+/* Labels */
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+}
+
+/* Emoji grid */
+.emojiGrid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 4px;
+}
+
+.emojiBtn {
+  background: none;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  font-size: 22px;
+  padding: 4px;
+  cursor: pointer;
+  line-height: 1;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.emojiBtn:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.emojiSelected {
+  border-color: var(--color-text);
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* Input */
+.input {
+  width: 100%;
+  padding: 10px var(--spacing-md);
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background: white;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.input:focus {
+  border-color: var(--color-text);
+}
+
+/* Slider */
+.slider {
+  width: 100%;
+  height: 6px;
+  accent-color: var(--color-text);
+  cursor: pointer;
+}
+
+.sliderLabels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--color-text-light);
+  margin-top: -2px;
+}
+
+/* Color grid */
+.colorGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.colorBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.colorBtn:hover {
+  transform: scale(1.15);
+}
+
+.colorSelected {
+  border-color: var(--color-text);
+  transform: scale(1.15);
+}
+
+/* Action buttons */
+.actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-top: 8px;
+  align-items: center;
+}
+
+.deleteBtn {
+  background: none;
+  border: 2px solid #E17055;
+  color: #E17055;
+  border-radius: 10px;
+  padding: 10px var(--spacing-md);
+  font-size: 15px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.deleteBtn:hover {
+  background: rgba(225, 112, 85, 0.1);
+}
+
+.cancelBtn {
+  flex: 1;
+  background: none;
+  border: 2px solid #e0e0e0;
+  color: var(--color-text-light);
+  border-radius: 10px;
+  padding: 10px var(--spacing-md);
+  font-size: 15px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.cancelBtn:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.saveBtn {
+  flex: 2;
+  background: var(--color-text);
+  border: none;
+  color: white;
+  border-radius: 10px;
+  padding: 10px var(--spacing-md);
+  font-size: 15px;
+  font-weight: 700;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.saveBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.saveBtn:not(:disabled):hover {
+  opacity: 0.85;
+}

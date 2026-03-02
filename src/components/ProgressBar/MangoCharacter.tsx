@@ -40,7 +40,7 @@ export function MangoCharacter({
         position: 'absolute',
         right: '5%',
         top: '50%',
-        transform: 'translateY(-50%)'
+        marginTop: '-40px' // half of SVG height (80px) — avoids framer-motion transform conflict
       }}
       animate={{
         scale,
