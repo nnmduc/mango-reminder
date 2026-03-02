@@ -1,0 +1,51 @@
+/* CSS Custom Properties - Color Palette and Design Tokens */
+:root {
+  /* Primary Colors */
+  --color-meal: #FF6B6B;      /* Coral red */
+  --color-homework: #4ECDC4;  /* Teal */
+  --color-tv: #45B7D1;        /* Sky blue */
+
+  /* UI Colors */
+  --color-bg: #FFF8E7;        /* Warm cream */
+  --color-text: #2D3436;      /* Dark gray */
+  --color-text-light: #636E72;
+
+  /* Timer States */
+  --color-normal: #2D3436;
+  --color-warning: #FDCB6E;   /* Yellow */
+  --color-urgent: #E17055;    /* Orange-red */
+
+  /* Spacing */
+  --touch-target: 48px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+
+  /* Typography */
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  --font-timer: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+}
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* Ensure fullscreen on iOS */
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}

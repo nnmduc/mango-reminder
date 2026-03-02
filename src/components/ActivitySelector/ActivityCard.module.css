@@ -1,0 +1,69 @@
+/* ActivityCard styles - Large touch target with color-coded background */
+.card {
+  /* Touch target size */
+  min-width: 160px;
+  min-height: 160px;
+  padding: var(--spacing-lg);
+
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+
+  /* Visual */
+  border: none;
+  border-radius: 16px;
+  background-color: var(--color-meal); /* fallback */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+
+  /* Typography */
+  font-family: var(--font-body);
+  color: white;
+
+  /* Transitions */
+  transition: box-shadow 0.2s ease;
+}
+
+.card:active {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.emoji {
+  font-size: 48px;
+  line-height: 1;
+}
+
+.name {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.duration {
+  font-size: 16px;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+/* Tablet responsive */
+@media (min-width: 768px) {
+  .card {
+    min-width: 200px;
+    min-height: 200px;
+  }
+
+  .emoji {
+    font-size: 64px;
+  }
+
+  .name {
+    font-size: 24px;
+  }
+
+  .duration {
+    font-size: 18px;
+  }
+}

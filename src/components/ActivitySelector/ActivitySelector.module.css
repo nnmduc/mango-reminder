@@ -1,0 +1,48 @@
+/* ActivitySelector styles - Grid layout with centered cards */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(var(--spacing-lg) * 2);
+  width: 100%;
+  max-width: 800px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-text);
+  text-align: center;
+  margin: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--spacing-lg);
+  width: 100%;
+  justify-items: center;
+}
+
+/* Tablet responsive */
+@media (min-width: 768px) {
+  .title {
+    font-size: 48px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: calc(var(--spacing-lg) * 1.5);
+  }
+}
+
+/* Mobile stack */
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+}

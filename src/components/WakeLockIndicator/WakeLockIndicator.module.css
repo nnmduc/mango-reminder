@@ -1,0 +1,43 @@
+/* WakeLockIndicator styles - Small status icon, non-intrusive */
+.indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 48px;
+  height: 48px;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: default;
+  user-select: none;
+  transition: opacity 0.3s ease;
+}
+
+.active {
+  opacity: 1;
+  border-color: var(--color-success, #4caf50);
+}
+
+.inactive {
+  opacity: 0.3;
+}
+
+.unsupported {
+  opacity: 0.4;
+}
+
+.error {
+  opacity: 0.5;
+  border-color: var(--color-warning, #ff9800);
+}
+
+@media (min-width: 768px) {
+  .indicator {
+    width: 56px;
+    height: 56px;
+    font-size: 26px;
+  }
+}

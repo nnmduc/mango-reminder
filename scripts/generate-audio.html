@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mango Reminder - Audio Generator</title>
+  <style>
+    body { font-family: system-ui; max-width: 800px; margin: 40px auto; padding: 20px; }
+    button { padding: 12px 24px; margin: 8px; font-size: 16px; cursor: pointer; }
+    .sound-controls { margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+    h3 { margin-top: 0; color: #333; }
+    .info { background: #f0f0f0; padding: 12px; border-radius: 4px; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>🥭 Mango Reminder Audio Generator</h1>
+  <p>Generate and test kid-friendly notification sounds. Click each button to preview and download.</p>
+
+  <div class="sound-controls">
+    <h3>🎉 Halfway Point (50%)</h3>
+    <p>Cheerful ascending C-E-G chime</p>
+    <button onclick="playAndDownload('halfway')">Play & Download</button>
+  </div>
+
+  <div class="sound-controls">
+    <h3>🔔 15 Minutes Remaining</h3>
+    <p>Gentle bell tone reminder</p>
+    <button onclick="playAndDownload('15min')">Play & Download</button>
+  </div>
+
+  <div class="sound-controls">
+    <h3>⏰ 5 Minutes Remaining</h3>
+    <p>Two-tone alert (slightly urgent)</p>
+    <button onclick="playAndDownload('5min')">Play & Download</button>
+  </div>
+
+  <div class="sound-controls">
+    <h3>⚡ 1 Minute Remaining</h3>
+    <p>Quick triple beep (urgent but friendly)</p>
+    <button onclick="playAndDownload('1min')">Play & Download</button>
+  </div>
+
+  <div class="sound-controls">
+    <h3>🎊 Timer Complete!</h3>
+    <p>Celebration fanfare</p>
+    <button onclick="playAndDownload('celebration')">Play & Download</button>
+  </div>
+
+  <div class="info">
+    <strong>Instructions:</strong>
+    <ol>
+      <li>Click each button to preview the sound</li>
+      <li>The MP3 file will download automatically</li>
+      <li>Move downloaded files to <code>public/sounds/</code> directory</li>
+      <li>All sounds are optimized: mono, ~128kbps, kid-friendly frequencies (300-2000 Hz)</li>
+    </ol>
+  </div>
+
+  <script>
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+    // Sound generation functions
+    const sounds = {
+      halfway: () => {
+        // Ascending C-E-G chime (cheerful)
+        const notes = [261.63, 329.63, 392.00]; // C4, E4, G4
+        return createChime(notes, 0.15, 0.4);
+      },
+      '15min': () => {
+        // Single gentle bell tone
+        return createBell(440, 0.5); // A4
+      },
+      '5min': () => {
+        // Two-tone alert
+        return createTwoTone(523.25, 659.25, 0.2, 0.35); // C5, E5
+      },
+      '1min': () => {
+        // Triple beep (urgent but friendly)
+        return createTripleBeep(587.33, 0.1, 0.6); // D5
+      },
+      celebration: () => {
+        // Fanfare with sparkle
+        return createCelebration();
+      }
+    };
+
+    function createChime(frequencies, noteDuration, totalDuration) {
+      const sampleRate = audioContext.sampleRate;
+      const buffer = audioContext.createBuffer(1, sampleRate * totalDuration, sampleRate);
+      const data = buffer.getChannelData(0);
+
+      frequencies.forEach((freq, i) => {
+        const startSample = Math.floor(i * noteDuration * sampleRate);
+        const duration = noteDuration * sampleRate;
+
+        for (let j = 0; j < duration; j++) {
+          const t = j / sampleRate;
+          const envelope = Math.exp(-5 * t / noteDuration); // Decay
+          data[startSample + j] += Math.sin(2 * Math.PI * freq * t) * envelope * 0.3;
+        }
+      });
+
+      return buffer;
+    }
+
+    function createBell(frequency, duration) {
+      const sampleRate = audioContext.sampleRate;
+      const buffer = audioContext.createBuffer(1, sampleRate * duration, sampleRate);
+      const data = buffer.getChannelData(0);
+
+      for (let i = 0; i < buffer.length; i++) {
+        const t = i / sampleRate;
+        const envelope = Math.exp(-3 * t); // Bell decay
+        // Bell-like timbre with harmonics
+        const fundamental = Math.sin(2 * Math.PI * frequency * t);
+        const harmonic2 = Math.sin(2 * Math.PI * frequency * 2.4 * t) * 0.3;
+        const harmonic3 = Math.sin(2 * Math.PI * frequency * 3.8 * t) * 0.2;
+        data[i] = (fundamental + harmonic2 + harmonic3) * envelope * 0.2;
+      }
+
+      return buffer;
+    }
+
+    function createTwoTone(freq1, freq2, toneDuration, totalDuration) {
+      const sampleRate = audioContext.sampleRate;
+      const buffer = audioContext.createBuffer(1, sampleRate * totalDuration, sampleRate);
+      const data = buffer.getChannelData(0);
+
+      // First tone
+      for (let i = 0; i < toneDuration * sampleRate; i++) {
+        const t = i / sampleRate;
+        const envelope = 0.5 * (1 - Math.cos(Math.PI * t / toneDuration));
+        data[i] = Math.sin(2 * Math.PI * freq1 * t) * envelope * 0.3;
+      }
+
+      // Second tone
+      const offset = Math.floor((toneDuration + 0.05) * sampleRate);
+      for (let i = 0; i < toneDuration * sampleRate; i++) {
+        const t = i / sampleRate;
+        const envelope = 0.5 * (1 - Math.cos(Math.PI * t / toneDuration));
+        data[offset + i] = Math.sin(2 * Math.PI * freq2 * t) * envelope * 0.3;
+      }
+
+      return buffer;
+    }
+
+    function createTripleBeep(frequency, beepDuration, totalDuration) {
+      const sampleRate = audioContext.sampleRate;
+      const buffer = audioContext.createBuffer(1, sampleRate * totalDuration, sampleRate);
+      const data = buffer.getChannelData(0);
+
+      for (let beep = 0; beep < 3; beep++) {
+        const startSample = Math.floor(beep * (beepDuration + 0.08) * sampleRate);
+        const beepSamples = beepDuration * sampleRate;
+
+        for (let i = 0; i < beepSamples; i++) {
+          const t = i / sampleRate;
+          const envelope = Math.sin(Math.PI * t / beepDuration); // Smooth envelope
+          data[startSample + i] = Math.sin(2 * Math.PI * frequency * t) * envelope * 0.3;
+        }
+      }
+
+      return buffer;
+    }
+
+    function createCelebration() {
+      const sampleRate = audioContext.sampleRate;
+      const duration = 1.2;
+      const buffer = audioContext.createBuffer(1, sampleRate * duration, sampleRate);
+      const data = buffer.getChannelData(0);
+
+      // Ascending fanfare: C-E-G-C
+      const notes = [
+        { freq: 523.25, start: 0, duration: 0.25 },      // C5
+        { freq: 659.25, start: 0.2, duration: 0.25 },    // E5
+        { freq: 783.99, start: 0.4, duration: 0.25 },    // G5
+        { freq: 1046.50, start: 0.6, duration: 0.6 }     // C6 (hold)
+      ];
+
+      notes.forEach(note => {
+        const startSample = Math.floor(note.start * sampleRate);
+        const noteSamples = note.duration * sampleRate;
+
+        for (let i = 0; i < noteSamples; i++) {
+          const t = i / sampleRate;
+          const envelope = Math.exp(-2 * t / note.duration);
+          const sample = Math.sin(2 * Math.PI * note.freq * t) * envelope * 0.25;
+          data[startSample + i] += sample;
+        }
+      });
+
+      // Add sparkle harmonics
+      for (let i = 0; i < buffer.length; i++) {
+        const t = i / sampleRate;
+        if (t > 0.6) {
+          const sparkle = Math.sin(2 * Math.PI * 2093 * t) * Math.random() * 0.05;
+          data[i] += sparkle;
+        }
+      }
+
+      return buffer;
+    }
+
+    async function playAndDownload(soundType) {
+      // Generate audio buffer
+      const buffer = sounds[soundType]();
+
+      // Play sound
+      const source = audioContext.createBufferSource();
+      source.buffer = buffer;
+      source.connect(audioContext.destination);
+      source.start();
+
+      // Convert to WAV and download
+      const wav = bufferToWave(buffer);
+      const blob = new Blob([wav], { type: 'audio/wav' });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `milestone-${soundType}.wav`;
+      a.click();
+
+      URL.revokeObjectURL(url);
+    }
+
+    function bufferToWave(buffer) {
+      const length = buffer.length * 2;
+      const wav = new ArrayBuffer(44 + length);
+      const view = new DataView(wav);
+      const channels = 1;
+      const sampleRate = buffer.sampleRate;
+
+      // WAV header
+      writeString(view, 0, 'RIFF');
+      view.setUint32(4, 36 + length, true);
+      writeString(view, 8, 'WAVE');
+      writeString(view, 12, 'fmt ');
+      view.setUint32(16, 16, true);
+      view.setUint16(20, 1, true);
+      view.setUint16(22, channels, true);
+      view.setUint32(24, sampleRate, true);
+      view.setUint32(28, sampleRate * 2, true);
+      view.setUint16(32, channels * 2, true);
+      view.setUint16(34, 16, true);
+      writeString(view, 36, 'data');
+      view.setUint32(40, length, true);
+
+      // Audio data
+      const data = buffer.getChannelData(0);
+      let offset = 44;
+      for (let i = 0; i < data.length; i++) {
+        const sample = Math.max(-1, Math.min(1, data[i]));
+        view.setInt16(offset, sample * 0x7FFF, true);
+        offset += 2;
+      }
+
+      return wav;
+    }
+
+    function writeString(view, offset, string) {
+      for (let i = 0; i < string.length; i++) {
+        view.setUint8(offset + i, string.charCodeAt(i));
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+# Dependencies
+node_modules/
+npm-debug.log
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+yarn.lock
+package-lock.json
+pnpm-lock.yaml
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.env.local
+.env.*.local
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+.nuxt/
+.cache/
+.vuepress/dist
+.serverless/
+.fusebox/
+.dynamodb/
+.tern-port
+
+# Environment
+.env
+.env.production.local
+.env.development.local
+.env.test.local
+
+# Logs
+logs
+*.log
+lerna-debug.log*
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Testing
+.nyc_output
+coverage
+*.lcov
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+env/
+venv/
+*.egg-info/
+dist/
+
+# IDE specific
+.vscode/settings.json
+.idea/workspace.xml
+
+# Temporary files
+*.tmp
+*.temp
+.cache

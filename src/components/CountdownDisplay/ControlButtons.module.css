@@ -1,0 +1,93 @@
+/* ControlButtons styles - Large touch targets in thumb zone */
+.container {
+  display: flex;
+  gap: var(--spacing-lg);
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  padding: var(--spacing-lg);
+}
+
+.button {
+  /* Touch target size */
+  min-width: 140px;
+  min-height: var(--touch-target);
+  padding: var(--spacing-md) var(--spacing-lg);
+
+  /* Layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+
+  /* Visual */
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 600;
+
+  /* Transitions */
+  transition: all 0.2s ease;
+}
+
+.primary {
+  background-color: var(--color-homework);
+  color: white;
+  box-shadow: 0 4px 12px rgba(78, 205, 196, 0.3);
+}
+
+.primary:active {
+  box-shadow: 0 2px 6px rgba(78, 205, 196, 0.4);
+}
+
+.secondary {
+  background-color: var(--color-text-light);
+  color: white;
+  box-shadow: 0 4px 12px rgba(99, 110, 114, 0.2);
+}
+
+.secondary:active {
+  box-shadow: 0 2px 6px rgba(99, 110, 114, 0.3);
+}
+
+.icon {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.label {
+  font-size: 18px;
+}
+
+/* Tablet responsive */
+@media (min-width: 768px) {
+  .button {
+    min-width: 180px;
+    min-height: 60px;
+    font-size: 20px;
+  }
+
+  .icon {
+    font-size: 28px;
+  }
+
+  .label {
+    font-size: 20px;
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+  .container {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .button {
+    width: 100%;
+    max-width: 280px;
+  }
+}
