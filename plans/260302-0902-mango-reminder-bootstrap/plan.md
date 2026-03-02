@@ -33,7 +33,7 @@ Countdown timer for kids (4-12) on iPad/tablets. Features animated alligator eat
 | 3 | Animations | 4h | pending | [phase-03](./phase-03-animations.md) |
 | 4 | Audio System | 2h | pending | [phase-04](./phase-04-audio-system.md) |
 | 5 | Screen Wake Lock | 1h | completed | [phase-05](./phase-05-screen-wake-lock.md) |
-| 6 | PWA Setup | 2h | pending | [phase-06](./phase-06-pwa-setup.md) |
+| 6 | PWA Setup | 2h | completed | [phase-06](./phase-06-pwa-setup.md) |
 | 7 | Testing | 2.5h | completed | [phase-07](./phase-07-testing.md) |
 
 ## Key Dependencies
