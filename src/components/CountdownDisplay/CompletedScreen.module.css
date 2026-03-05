@@ -1,0 +1,118 @@
+/* CompletedScreen - Celebration view, soft pastel minimal */
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xl);
+  padding: var(--spacing-xl) var(--spacing-lg);
+}
+
+/* Star circle badge */
+.starWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.starCircle {
+  width: 160px;
+  height: 160px;
+  background: var(--yellow);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+}
+
+.starEmoji {
+  font-size: 80px;
+  line-height: 1;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.12));
+}
+
+/* Text block */
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+  text-align: center;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--color-text);
+  margin: 0;
+  line-height: 1.1;
+}
+
+.subtitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.detail {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-text-light);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Back button — full-width dark pill */
+.backBtn {
+  width: 100%;
+  max-width: 340px;
+  min-height: 56px;
+  padding: var(--spacing-md) var(--spacing-xl);
+
+  background: var(--color-text);
+  color: white;
+  border: none;
+  border-radius: var(--r-full);
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 800;
+  cursor: pointer;
+
+  box-shadow: 0 4px 16px rgba(26,26,46,0.25);
+  transition: box-shadow 0.15s ease, transform 0.12s ease;
+}
+
+.backBtn:hover {
+  box-shadow: 0 6px 22px rgba(26,26,46,0.3);
+  transform: translateY(-1px);
+}
+
+.backBtn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(26,26,46,0.2);
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .starCircle { width: 200px; height: 200px; }
+  .starEmoji  { font-size: 100px; }
+  .title      { font-size: 48px; }
+  .subtitle   { font-size: 24px; }
+  .detail     { font-size: 17px; }
+  .backBtn    { max-width: 400px; min-height: 62px; font-size: 19px; }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .container  { gap: var(--spacing-lg); }
+  .starCircle { width: 130px; height: 130px; }
+  .starEmoji  { font-size: 64px; }
+  .title      { font-size: 30px; }
+  .subtitle   { font-size: 17px; }
+  .backBtn    { font-size: 16px; min-height: 52px; }
+}

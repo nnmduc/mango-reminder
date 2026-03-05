@@ -1,141 +1,106 @@
-/* CountdownDisplay styles - Fullscreen layout with sections */
+/* CountdownDisplay - Clean pastel minimal timer view */
+
 .container {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: var(--spacing-lg);
+  justify-content: flex-start;
+  gap: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-lg) var(--spacing-md);
 }
 
+/* Top bar: ← back on left, 🔊 mute on right */
 .header {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: var(--spacing-md);
-  margin-top: var(--spacing-lg);
-  position: relative;
+  justify-content: space-between;
   width: 100%;
+  flex-shrink: 0;
 }
 
-.muteButton {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background: transparent;
-  border: 2px solid var(--color-border);
-  border-radius: 50%;
-  width: 56px;
-  height: 56px;
-  font-size: 28px;
-  cursor: pointer;
+/* Shared icon button — rounded square white surface (back + mute) */
+.iconBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-md);
+  background: white;
+  border: 2px solid rgba(0,0,0,0.06);
+  box-shadow: var(--shadow-xs);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
-  user-select: none;
+  font-size: 18px;
+  color: var(--color-text-light);
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
   -webkit-tap-highlight-color: transparent;
+  min-height: unset;
+  min-width: unset;
+  flex-shrink: 0;
+}
+.iconBtn:hover  { transform: scale(1.05); box-shadow: var(--shadow-sm); }
+.iconBtn:active { transform: scale(0.94); }
+
+/* Activity pill — centered */
+.activityPill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  border: 2px solid rgba(0,0,0,0.06);
+  border-radius: var(--r-full);
+  padding: 8px 18px 8px 10px;
+  box-shadow: var(--shadow-sm);
+  align-self: center;
+  flex-shrink: 0;
 }
 
-.muteButton:hover {
-  background: var(--color-bg-secondary);
-  transform: scale(1.05);
-}
-
-.muteButton:active {
-  transform: scale(0.95);
-}
-
-.emoji {
-  font-size: 64px;
-  line-height: 1;
-}
+.emoji { font-size: 22px; line-height: 1; }
 
 .activityName {
-  font-size: 32px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--color-text);
   margin: 0;
-  text-align: center;
 }
 
+/* Ring timer — natural size, no flex stretch */
 .timerSection {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 1;
-  max-height: 200px;
+  flex-shrink: 0;
 }
 
-.progressSection {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Track card */
+.trackSection {
   width: 100%;
-  max-width: 600px;
-  min-height: 120px;
+  max-width: 480px;
+  flex-shrink: 0;
 }
 
+/* Controls — push to bottom with auto margin */
 .controlsSection {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-bottom: var(--spacing-lg);
+  margin-top: auto;
+  padding-bottom: var(--spacing-sm);
 }
 
-/* Tablet responsive */
+/* Tablet */
 @media (min-width: 768px) {
-  .container {
-    padding: calc(var(--spacing-lg) * 2);
-  }
-
-  .emoji {
-    font-size: 80px;
-  }
-
-  .activityName {
-    font-size: 40px;
-  }
-
-  .timerSection {
-    max-height: 250px;
-  }
-
-  .progressSection {
-    max-width: 800px;
-    min-height: 180px;
-  }
-
-  .muteButton {
-    width: 64px;
-    height: 64px;
-    font-size: 32px;
-  }
+  .container    { padding: var(--spacing-md) var(--spacing-xl) var(--spacing-lg); gap: var(--spacing-lg); }
+  .emoji        { font-size: 28px; }
+  .activityName { font-size: 20px; }
+  .trackSection { max-width: 560px; }
 }
 
-/* Mobile responsive */
+/* Mobile */
 @media (max-width: 480px) {
-  .emoji {
-    font-size: 48px;
-  }
-
-  .activityName {
-    font-size: 24px;
-  }
-
-  .timerSection {
-    max-height: 150px;
-  }
-
-  .progressSection {
-    min-height: 80px;
-  }
-
-  .muteButton {
-    width: 48px;
-    height: 48px;
-    font-size: 24px;
-  }
+  .container    { padding: var(--spacing-xs) var(--spacing-md) var(--spacing-sm); gap: var(--spacing-sm); }
+  .emoji        { font-size: 18px; }
+  .activityName { font-size: 14px; }
 }

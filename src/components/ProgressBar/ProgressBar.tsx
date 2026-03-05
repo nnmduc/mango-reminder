@@ -55,7 +55,7 @@ export function ProgressBar({
   return (
     <div className={styles.container}>
       {/* Progress track background */}
-      <ProgressTrack />
+      <ProgressTrack progress={progress} />
 
       {/* Animated characters */}
       <div className={styles.charactersLayer}>

@@ -1,98 +1,116 @@
-/* ActivityCard styles - Large touch target with color-coded background */
+/* ActivityCard - Soft pastel flat card style */
+
 .wrapper {
   position: relative;
   display: inline-flex;
+  width: 100%;
 }
 
+.card {
+  width: 100%;
+  min-height: 120px;
+  padding: var(--spacing-md);
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 4px;
+
+  border: none;
+  border-radius: var(--clay-radius);
+  background-color: var(--peach); /* overridden by activity.color inline style */
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  overflow: hidden; /* clip the decorative circle */
+  position: relative;
+
+  font-family: var(--font-body);
+  font-weight: 700;
+  color: var(--color-text);
+
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+/* Decorative circle - large semi-transparent circle in bottom-right corner */
+.decorCircle {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  pointer-events: none;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.card:active {
+  box-shadow: var(--shadow-xs);
+  transform: translateY(2px);
+}
+
+.emoji {
+  font-size: 40px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text);
+  text-align: left;
+  line-height: 1.2;
+}
+
+.duration {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-light);
+}
+
+/* Edit button — top-right corner */
 .editBtn {
   position: absolute;
-  top: 6px;
-  right: 6px;
-  background: rgba(255, 255, 255, 0.85);
+  top: 8px;
+  right: 8px;
+  background: rgba(255,255,255,0.85);
   border: none;
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  font-size: 15px;
+  width: 28px;
+  height: 28px;
+  font-size: 12px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-xs);
   transition: transform 0.15s ease, background 0.15s ease;
   z-index: 1;
 }
 
 .editBtn:hover {
-  transform: scale(1.1);
+  transform: scale(1.15);
   background: white;
 }
 
-.card {
-  /* Touch target size */
-  min-width: 160px;
-  min-height: 160px;
-  padding: var(--spacing-lg);
-
-  /* Layout */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-sm);
-
-  /* Visual */
-  border: none;
-  border-radius: 16px;
-  background-color: var(--color-meal); /* fallback */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-
-  /* Typography */
-  font-family: var(--font-body);
-  color: white;
-
-  /* Transitions */
-  transition: box-shadow 0.2s ease;
-}
-
-.card:active {
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-}
-
-.emoji {
-  font-size: 48px;
-  line-height: 1;
-}
-
-.name {
-  font-size: 20px;
-  font-weight: 600;
-  text-align: center;
-}
-
-.duration {
-  font-size: 16px;
-  opacity: 0.9;
-  font-weight: 500;
-}
-
-/* Tablet responsive */
+/* Tablet */
 @media (min-width: 768px) {
-  .card {
-    min-width: 200px;
-    min-height: 200px;
-  }
+  .card    { min-height: 160px; padding: var(--spacing-lg); }
+  .emoji   { font-size: 52px; }
+  .name    { font-size: 18px; }
+  .duration { font-size: 14px; }
+  .editBtn { width: 32px; height: 32px; font-size: 13px; }
+  .decorCircle { width: 100px; height: 100px; bottom: -25px; right: -25px; }
+}
 
-  .emoji {
-    font-size: 64px;
-  }
-
-  .name {
-    font-size: 24px;
-  }
-
-  .duration {
-    font-size: 18px;
-  }
+/* Mobile */
+@media (max-width: 480px) {
+  .card  { min-height: 100px; padding: var(--spacing-sm) var(--spacing-md); }
+  .emoji { font-size: 32px; }
+  .name  { font-size: 14px; }
 }

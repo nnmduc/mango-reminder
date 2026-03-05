@@ -40,7 +40,8 @@ export function ActivitySelector({ onSelectActivity }: ActivitySelectorProps) {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>What are you doing?</h1>
+      <h1 className={styles.title}>What are you doing today?</h1>
+      <p className={styles.subtitle}>Tap an activity to start your timer</p>
 
       <div className={styles.grid}>
         {activities.map((activity) => (
@@ -74,6 +75,9 @@ export function ActivitySelector({ onSelectActivity }: ActivitySelectorProps) {
           onClose={closeModal}
         />
       )}
+
+      {/* Footer — always visible at the bottom */}
+      <p className={styles.footer}>🦎 The alligator is waiting for the mango 🥭</p>
     </div>
   )
 }

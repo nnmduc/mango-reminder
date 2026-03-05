@@ -1,34 +1,93 @@
-/* CSS Custom Properties - Color Palette and Design Tokens */
+/* Google Fonts — Plus Jakarta Sans */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+/* ============================================================
+   DESIGN TOKENS — Soft Pastel Minimal
+   ============================================================ */
 :root {
-  /* Primary Colors */
-  --color-meal: #FF6B6B;      /* Coral red */
-  --color-homework: #4ECDC4;  /* Teal */
-  --color-tv: #45B7D1;        /* Sky blue */
+  /* Backgrounds */
+  --bg:         #FAFAF8;
+  --surface:    #FFFFFF;
+  --surface-2:  #F4F4F0;
 
-  /* UI Colors */
-  --color-bg: #FFF8E7;        /* Warm cream */
-  --color-text: #2D3436;      /* Dark gray */
-  --color-text-light: #636E72;
+  /* Semantic aliases used by components */
+  --color-bg:       #FAFAF8;
+  --color-surface:  #FFFFFF;
 
-  /* Timer States */
-  --color-normal: #2D3436;
-  --color-warning: #FDCB6E;   /* Yellow */
-  --color-urgent: #E17055;    /* Orange-red */
+  /* Pastel activity tints */
+  --peach:      #FFD6C0;
+  --peach-dk:   #FFA882;
+  --peach-text: #C05A2A;
+  --mint:       #C7F0DD;
+  --mint-dk:    #7ED4B2;
+  --mint-text:  #2D7A5F;
+  --sky:        #B5D8F7;
+  --sky-dk:     #7BB8EF;
+  --sky-text:   #1A5FA8;
+  --lavender:   #D4C5F5;
+  --lavender-dk:#A090CC;
+  --lavender-text: #5B3DAA;
+  --yellow:     #FFF3C4;
+  --yellow-dk:  #FFD84A;
+  --yellow-text:#856B00;
+
+  /* Text */
+  --text:           #1A1A2E;
+  --text-2:         #6B6B80;
+  --text-3:         #A5A5BB;
+  /* Semantic aliases */
+  --color-text:       #1A1A2E;
+  --color-text-light: #6B6B80;
+  --color-text-muted: #9494A8;
+
+  /* Brand accent */
+  --color-mango:      #FF8C00;
+  --color-mango-dk:   #CC6F00;
+
+  /* Timer states */
+  --color-normal:  #1A1A2E;
+  --color-warning: #D97706;
+  --color-urgent:  #DC2626;
+
+  /* Shadows — ultra-light */
+  --shadow-xs:  0 1px 3px rgba(0,0,0,0.06);
+  --shadow-sm:  0 2px 8px rgba(0,0,0,0.07);
+  --shadow-md:  0 4px 16px rgba(0,0,0,0.08);
+  --shadow-lg:  0 8px 32px rgba(0,0,0,0.10);
+
+  /* Clay / card shadows used by components */
+  --clay-shadow:         0 4px 14px rgba(0,0,0,0.10);
+  --clay-shadow-sm:      0 2px 8px rgba(0,0,0,0.08);
+  --clay-shadow-hover:   0 6px 20px rgba(0,0,0,0.13);
+  --clay-shadow-pressed: 0 1px 4px rgba(0,0,0,0.08);
+  --clay-border:         2px solid rgba(0,0,0,0.06);
+  --clay-radius:         16px;
+  --clay-radius-lg:      20px;
 
   /* Spacing */
-  --touch-target: 48px;
-  --spacing-sm: 8px;
-  --spacing-md: 16px;
-  --spacing-lg: 24px;
+  --touch-target: 44px;
+  --spacing-xs:   6px;
+  --spacing-sm:   10px;
+  --spacing-md:   16px;
+  --spacing-lg:   24px;
+  --spacing-xl:   36px;
+
+  /* Border radius */
+  --r-sm:   10px;
+  --r-md:   16px;
+  --r-lg:   20px;
+  --r-xl:   24px;
+  --r-2xl:  32px;
+  --r-full: 999px;
 
   /* Typography */
-  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  --font-timer: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  --font-body:  'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-timer: 'Plus Jakarta Sans', -apple-system, sans-serif;
 }
 
-/* Global Styles */
+/* ============================================================
+   GLOBAL RESET
+   ============================================================ */
 * {
   margin: 0;
   padding: 0;
@@ -39,13 +98,19 @@ body {
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: var(--color-bg);
-  color: var(--color-text);
+  background: var(--bg);
+  color: var(--text);
 }
 
-/* Ensure fullscreen on iOS */
 html, body, #root {
   width: 100%;
   height: 100%;
   overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

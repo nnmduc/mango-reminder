@@ -1,10 +1,10 @@
-/* CountdownDisplay component - Fullscreen timer view with controls */
+/* CountdownDisplay - Fullscreen timer view with controls */
 import { useEffect } from 'react'
 import type { Activity, TimerState } from '../../types/activity'
 import { TimerDigits } from './TimerDigits'
 import { ControlButtons } from './ControlButtons'
-import { ProgressBar } from '../ProgressBar/ProgressBar'
-import { WakeLockIndicator } from '../WakeLockIndicator/WakeLockIndicator'
+import { CompletedScreen } from './CompletedScreen'
+import { TrackCard } from './TrackCard'
 import { useWakeLock } from '../../hooks/use-wake-lock'
 import styles from './CountdownDisplay.module.css'
 
@@ -18,6 +18,14 @@ interface CountdownDisplayProps {
   onToggleMute?: () => void
 }
 
+function BackIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M19 12H5M12 5l-7 7 7 7" />
+    </svg>
+  )
+}
+
 export function CountdownDisplay({
   activity,
   remainingSeconds,
@@ -27,68 +35,66 @@ export function CountdownDisplay({
   isMuted = false,
   onToggleMute
 }: CountdownDisplayProps) {
-  // Calculate progress (0 = start, 1 = complete), clamped to avoid negative values
-  // during the brief render before useCountdown syncs to the new activity duration
   const progress = Math.max(0, Math.min(1, 1 - remainingSeconds / activity.duration))
   const isRunning = timerState === 'running'
   const isCompleted = timerState === 'completed'
 
-  const { state: wakeLockState, request: requestWakeLock, release: releaseWakeLock } = useWakeLock()
+  const { request: requestWakeLock, release: releaseWakeLock } = useWakeLock()
 
-  // Manage wake lock based on timer state
   useEffect(() => {
-    if (isRunning) {
-      requestWakeLock()
-    } else {
-      releaseWakeLock()
-    }
+    if (isRunning) requestWakeLock()
+    else releaseWakeLock()
   }, [isRunning, requestWakeLock, releaseWakeLock])
+
+  // Show celebration screen when done
+  if (isCompleted) {
+    return <CompletedScreen activity={activity} onReset={onReset} />
+  }
 
   return (
     <div className={styles.container}>
-      {/* Activity info at top */}
+      {/* Top bar: ← back on left, 🔊 mute on right */}
       <div className={styles.header}>
-        {/* Wake lock status indicator (top-left) */}
-        <WakeLockIndicator
-          isActive={wakeLockState.isActive}
-          isSupported={wakeLockState.isSupported}
-          error={wakeLockState.error}
-        />
+        <button
+          className={styles.iconBtn}
+          onClick={onReset}
+          aria-label="Back to activities"
+        >
+          <BackIcon />
+        </button>
 
-        <span className={styles.emoji}>{activity.emoji}</span>
-        <h2 className={styles.activityName}>{activity.name}</h2>
-
-        {/* Mute toggle button */}
         {onToggleMute && (
           <button
-            className={styles.muteButton}
+            className={styles.iconBtn}
             onClick={onToggleMute}
             aria-label={isMuted ? 'Unmute sounds' : 'Mute sounds'}
-            title={isMuted ? 'Unmute sounds' : 'Mute sounds'}
           >
             {isMuted ? '🔇' : '🔊'}
           </button>
         )}
       </div>
 
-      {/* Timer in center */}
+      {/* Activity pill */}
+      <div className={styles.activityPill}>
+        <span className={styles.emoji}>{activity.emoji}</span>
+        <h2 className={styles.activityName}>{activity.name}</h2>
+      </div>
+
+      {/* SVG ring timer */}
       <div className={styles.timerSection}>
         <TimerDigits
           remainingSeconds={remainingSeconds}
           totalSeconds={activity.duration}
+          ringColor={activity.color}
         />
       </div>
 
-      {/* Progress bar with animated alligator eating mango */}
-      <div className={styles.progressSection}>
-        <ProgressBar
-          progress={progress}
-          isRunning={isRunning}
-          isCompleted={isCompleted}
-        />
+      {/* Track card: progress bar + 🐊 dots 🥭 */}
+      <div className={styles.trackSection}>
+        <TrackCard progress={progress} isRunning={isRunning} />
       </div>
 
-      {/* Controls at bottom */}
+      {/* Controls */}
       <div className={styles.controlsSection}>
         <ControlButtons
           timerState={timerState}

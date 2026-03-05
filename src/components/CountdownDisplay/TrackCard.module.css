@@ -1,0 +1,71 @@
+/* TrackCard - White card with progress bar and emoji characters */
+
+.card {
+  background: white;
+  border-radius: var(--r-xl);
+  padding: 14px 18px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+/* Linear progress bar */
+.bar {
+  height: 8px;
+  background: var(--surface-2, #F4F4F0);
+  border-radius: var(--r-full);
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  background: var(--mint-dk, #7ED4B2);
+  border-radius: var(--r-full);
+  transition: width 0.8s linear;
+}
+
+/* Characters row */
+.chars {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.char {
+  font-size: 30px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* Milestone dots between characters */
+.dots {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 10px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #E8E8E8;
+  transition: background 0.3s ease;
+  flex-shrink: 0;
+}
+
+.dotFilled {
+  background: var(--mint-dk, #7ED4B2);
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .card  { padding: 12px 14px; gap: 8px; }
+  .char  { font-size: 24px; }
+  .dot   { width: 6px; height: 6px; }
+  .dots  { gap: 5px; padding: 0 8px; }
+}

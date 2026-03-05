@@ -30,6 +30,8 @@ export function ActivityCard({ activity, onSelect, onEdit }: ActivityCardProps) 
         whileHover={{ scale: 1.02 }}
         transition={{ type: 'spring', stiffness: 400, damping: 17 }}
       >
+        {/* Decorative circle in bottom-right corner */}
+        <div className={styles.decorCircle} />
         <div className={styles.emoji}>{activity.emoji}</div>
         <div className={styles.name}>{activity.name}</div>
         <div className={styles.duration}>{formatDuration(activity.duration)}</div>

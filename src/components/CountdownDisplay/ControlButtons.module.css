@@ -1,93 +1,82 @@
-/* ControlButtons styles - Large touch targets in thumb zone */
+/* ControlButtons - Clean pastel pill buttons */
+
 .container {
   display: flex;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-md);
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 500px;
-  padding: var(--spacing-lg);
+  max-width: 400px;
 }
 
 .button {
-  /* Touch target size */
-  min-width: 140px;
-  min-height: var(--touch-target);
-  padding: var(--spacing-md) var(--spacing-lg);
+  flex: 1;
+  min-height: 54px;
+  padding: var(--spacing-sm) var(--spacing-lg);
 
-  /* Layout */
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-sm);
+  gap: 8px;
 
-  /* Visual */
   border: none;
-  border-radius: 12px;
+  border-radius: var(--r-full);
   cursor: pointer;
   font-family: var(--font-body);
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
 
-  /* Transitions */
-  transition: all 0.2s ease;
+  transition: box-shadow 0.15s ease, transform 0.12s ease, opacity 0.15s ease;
 }
 
+.button:active {
+  transform: translateY(2px);
+  opacity: 0.9;
+}
+
+/* Primary - soft dark pill (Pause/Resume) */
 .primary {
-  background-color: var(--color-homework);
+  background: var(--color-text);
   color: white;
-  box-shadow: 0 4px 12px rgba(78, 205, 196, 0.3);
+  box-shadow: 0 4px 14px rgba(26,26,46,0.25);
+}
+.primary:hover {
+  box-shadow: 0 6px 18px rgba(26,26,46,0.3);
+  transform: translateY(-1px);
 }
 
-.primary:active {
-  box-shadow: 0 2px 6px rgba(78, 205, 196, 0.4);
-}
-
+/* Secondary - white outlined pill (Reset) */
 .secondary {
-  background-color: var(--color-text-light);
-  color: white;
-  box-shadow: 0 4px 12px rgba(99, 110, 114, 0.2);
+  background: white;
+  color: var(--color-text);
+  border: 2px solid rgba(0,0,0,0.10);
+  box-shadow: var(--shadow-sm);
 }
-
-.secondary:active {
-  box-shadow: 0 2px 6px rgba(99, 110, 114, 0.3);
+.secondary:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
 }
 
 .icon {
-  font-size: 24px;
+  display: flex;
+  align-items: center;
   line-height: 1;
 }
 
 .label {
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 700;
 }
 
-/* Tablet responsive */
+/* Tablet */
 @media (min-width: 768px) {
-  .button {
-    min-width: 180px;
-    min-height: 60px;
-    font-size: 20px;
-  }
-
-  .icon {
-    font-size: 28px;
-  }
-
-  .label {
-    font-size: 20px;
-  }
+  .button { min-height: 60px; }
+  .label  { font-size: 18px; }
 }
 
-/* Mobile responsive */
+/* Mobile */
 @media (max-width: 480px) {
-  .container {
-    flex-direction: column;
-    gap: var(--spacing-md);
-  }
-
-  .button {
-    width: 100%;
-    max-width: 280px;
-  }
+  .container { gap: var(--spacing-sm); max-width: 340px; }
+  .button    { min-height: 48px; }
+  .label     { font-size: 15px; }
 }
