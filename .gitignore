@@ -74,3 +74,9 @@ dist/
 *.tmp
 *.temp
 .cache
+
+# Project-specific
+docs/
+plans/
+scripts/
+.claude/

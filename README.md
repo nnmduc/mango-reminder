@@ -2,6 +2,8 @@
 
 A **kid-friendly countdown timer** PWA built for iPad and tablets. Designed to help children stay aware of time during daily activities — meals, homework, TV, and more.
 
+🌐 **Live demo:** [mango.scout.vn](https://mango.scout.vn)
+
 ---
 
 ## 🌟 Why This Exists
