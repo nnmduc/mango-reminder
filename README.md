@@ -6,6 +6,12 @@ A **kid-friendly countdown timer** PWA built for iPad and tablets. Designed to h
 
 ---
 
+## 📸 Screenshots
+
+![Mango Reminder on tablet — activity picker, countdown timer, and custom preset editor](assets/preview.png)
+
+---
+
 ## 🌟 Why This Exists
 
 Traditional timers (like Apple's built-in Clock app) have two big problems for kids:
