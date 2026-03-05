@@ -9,11 +9,11 @@ export interface Activity {
   isDefault?: boolean // default presets cannot be deleted
 }
 
-// Predefined color palette for custom presets
+// Predefined color palette for custom presets — soft pastels
 export const PRESET_COLORS = [
-  '#FF6B6B', '#FF8E53', '#FDCB6E', '#A8E063',
-  '#4ECDC4', '#45B7D1', '#6C5CE7', '#FD79A8',
-  '#E17055', '#00B894', '#0984E3', '#D63031',
+  '#FFD6C0', '#FFC8E0', '#FFF3C4', '#C7F0DD',
+  '#B5D8F7', '#D4C5F5', '#FFDDE1', '#C8F4E8',
+  '#FFE4B5', '#C5E8FF', '#E8D5FF', '#D4F5D0',
 ]
 
 // Default emojis for the picker
@@ -29,7 +29,7 @@ export const DEFAULT_ACTIVITIES: Activity[] = [
     id: 'meal',
     name: 'Meal Time',
     duration: 1800, // 30 minutes
-    color: '#FF6B6B',
+    color: '#FFD6C0', // peach pastel
     emoji: '🍽️',
     isDefault: true,
   },
@@ -37,15 +37,15 @@ export const DEFAULT_ACTIVITIES: Activity[] = [
     id: 'homework',
     name: 'Homework',
     duration: 2700, // 45 minutes
-    color: '#4ECDC4',
+    color: '#D4C5F5', // lavender pastel
     emoji: '📚',
     isDefault: true,
-    },
-    {
+  },
+  {
     id: 'tv',
     name: 'TV Time',
     duration: 1200, // 20 minutes
-    color: '#45B7D1',
+    color: '#FFF3C4', // yellow pastel
     emoji: '📺',
     isDefault: true,
   },
