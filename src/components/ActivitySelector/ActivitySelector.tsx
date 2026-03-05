@@ -77,7 +77,7 @@ export function ActivitySelector({ onSelectActivity }: ActivitySelectorProps) {
       )}
 
       {/* Footer — always visible at the bottom */}
-      <p className={styles.footer}>🦎 The alligator is waiting for the mango 🥭</p>
+      <p className={styles.footer}>🐊 The alligator is waiting for the mango 🥭</p>
     </div>
   )
 }

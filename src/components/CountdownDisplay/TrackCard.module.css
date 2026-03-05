@@ -1,71 +1,85 @@
-/* TrackCard - White card with progress bar and emoji characters */
+/* TrackCard — Alligator chase track */
 
 .card {
   background: white;
   border-radius: var(--r-xl);
-  padding: 14px 18px;
+  padding: 16px 18px;
   box-shadow: var(--shadow-sm);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
   width: 100%;
 }
 
-/* Linear progress bar */
-.bar {
-  height: 8px;
+/* The runway — pill-shaped track */
+.runway {
+  position: relative;
+  height: 54px;
   background: var(--surface-2, #F4F4F0);
   border-radius: var(--r-full);
-  overflow: hidden;
+  overflow: visible; /* allow gator to bounce above runway edge */
 }
 
-.barFill {
-  height: 100%;
-  background: var(--mint-dk, #7ED4B2);
+/* Green eaten-path fill */
+.trail {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(90deg, #C7F0DD 0%, #7ED4B2 100%);
   border-radius: var(--r-full);
   transition: width 0.8s linear;
+  pointer-events: none;
 }
 
-/* Characters row */
-.chars {
-  display: flex;
-  align-items: center;
-  gap: 0;
+/* Small mango snacks along the path */
+.snack {
+  position: absolute;
+  top: 50%;
+  font-size: 13px;
+  line-height: 1;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  display: inline-block;
 }
 
-.char {
+/* Alligator position wrapper — CSS transition for smooth horizontal movement */
+.gatorPos {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: left 0.8s linear;
+  z-index: 3;
+}
+
+/* Flip wrapper so gator faces right toward the mango */
+.gatorFlip {
+  transform: scaleX(-1);
+  display: inline-block;
+}
+
+/* Gator emoji — framer-motion handles bounce/shake */
+.gatorEmoji {
+  font-size: 40px;
+  line-height: 1;
+  display: inline-block;
+}
+
+/* Big finish-line mango */
+.bigMango {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
   font-size: 30px;
   line-height: 1;
-  flex-shrink: 0;
-}
-
-/* Milestone dots between characters */
-.dots {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 0 10px;
-}
-
-.dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #E8E8E8;
-  transition: background 0.3s ease;
-  flex-shrink: 0;
-}
-
-.dotFilled {
-  background: var(--mint-dk, #7ED4B2);
+  z-index: 2;
+  display: inline-block;
 }
 
 /* Mobile */
 @media (max-width: 480px) {
-  .card  { padding: 12px 14px; gap: 8px; }
-  .char  { font-size: 24px; }
-  .dot   { width: 6px; height: 6px; }
-  .dots  { gap: 5px; padding: 0 8px; }
+  .card    { padding: 12px 14px; }
+  .runway  { height: 44px; }
+  .gatorEmoji { font-size: 32px; }
+  .bigMango   { font-size: 24px; right: 10px; }
+  .snack      { font-size: 11px; }
 }
